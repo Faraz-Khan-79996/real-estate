@@ -1,8 +1,11 @@
 import express from 'express'
-import {} from '../controllers/auth.controller.js'
+import {updateUserInfo} from '../controllers/user.controller.js'
+import { isLoggedIn } from '../utils/authMiddleware.js';
 
 const router = express.Router();
 
 // router.get('/' , )
+
+router.post('/update/:id' ,isLoggedIn , updateUserInfo)
 
 export default router;
