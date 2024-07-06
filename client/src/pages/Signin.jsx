@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import axios from 'axios'
+import {useDispatch, useSelector} from 'react-redux'
+import {signInStart , signInSuccess , signInFailure} from '../redux/user/userSlice.js'
 
 function Signin() {
   const [formData, setFormData] = useState({
     email : "",
     password : "",
   });
-  const [error , setError] = useState(null)
-  const [loading , setLoading] = useState(false)
+  
+  const {loading , error} = useSelector(state => state.user)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
+
 
   const handleChange = (e) => {
     setFormData((data)=>{
@@ -19,28 +24,28 @@ function Signin() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // console.log(formData);
-    setLoading(prev => true)
+    dispatch(signInStart())
     
     try {
       const {data} = await axios.post('/api/auth/signin' , formData , {
         withCredentials : true,
       } )
+      dispatch(signInSuccess(data))
       navigate('/')
       
     } catch (error) {
       if(error.response){
-        setError(error.response.data.message)
+        dispatch(signInFailure(error.response.data.message))
       }
-    }
-    finally{
-      setLoading(false)
+      else{
+        dispatch(signInFailure(error.message))
+      }
     }
   }
 
   return (
     <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
+      <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="email"
