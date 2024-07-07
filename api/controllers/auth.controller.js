@@ -4,11 +4,11 @@ import { errorhandler } from '../utils/error.js'
 import jwt from 'jsonwebtoken'
 import admin from 'firebase-admin'
 
-import serviceAccount from '../firebase_service_account.json' assert { type: "json" }
+// import serviceAccount from '../firebase_service_account.json' assert { type: "json" }
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-});
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+// });
 
 const signup = async (req, res, next) => {
 
@@ -55,13 +55,13 @@ const signin = async (req, res, next) => {
 const google = async (req, res, next) => {
     try {
 
-        if (req.body.idToken) {
-            // Verify the ID token provided by the client
-            //will throw error if wrong or incorrect idToken
-            const decodedToken = await admin.auth().verifyIdToken(req.body.idToken);
-        } else {
-            next(errorhandler(404, "idToken missing"))
-        }
+        // if (req.body.idToken) {
+        //     // Verify the ID token provided by the client
+        //     //will throw error if wrong or incorrect idToken
+        //     const decodedToken = await admin.auth().verifyIdToken(req.body.idToken);
+        // } else {
+        //     next(errorhandler(404, "idToken missing"))
+        // }
 
         const user = await User.findOne({ email: req.body.email });
 

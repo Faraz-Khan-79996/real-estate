@@ -8,6 +8,7 @@ import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
+const PORT = process.env.PORT || 3000;
 
 main().catch(err => console.log(err));
 
@@ -15,14 +16,15 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL);
     console.log("database connected");
 }
+const app = express()
+
 
 const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
-const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
 
 app.use('/api/user' , UserRouter)
 app.use('/api/auth' , AuthRouter)
@@ -43,6 +45,6 @@ app.use((err , req , res , next)=>{
     })
 })
 
-app.listen(3000 , ()=>{
-    console.log(`server running at : https://localhost:${3000}`);
+app.listen(PORT , ()=>{
+    console.log(`server running at : http://localhost:${PORT}`);
 })
