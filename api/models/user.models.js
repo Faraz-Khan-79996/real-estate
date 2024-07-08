@@ -20,6 +20,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://cdn-icons-png.flaticon.com/256/5989/5989400.png"
     },
+    saved:{
+      type:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Listing'        
+      }],
+      unique: true
+    },
+    listings:{
+      type:[
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Listing'            
+        }
+      ],
+      unique : true
+    }
   },
   { timestamps: true }
 );

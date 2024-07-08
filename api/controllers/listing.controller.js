@@ -1,4 +1,5 @@
 import Listing from '../models/listing.model.js';
+import User from '../models/user.models.js';
 import { errorhandler } from '../utils/error.js';
 
 export const createListing = async (req, res, next) => {
@@ -113,3 +114,24 @@ export const getListings = async (req, res, next) => {
         next(error);
     }
 };
+
+export const saveListing = async (req , res , next)=>{
+
+    try {
+        const {id} = req.params;
+        const userId = req.user.id
+        const {type} = req.query;
+        
+        let userDoc;
+        if(type && type == "unsave"){
+            userDoc = await User.findByIdAndUpdate(userId , {$pull : {saved : id}} , {new:true})
+        }
+        else{
+            userDoc = await User.findByIdAndUpdate(userId , {$addToSet : {saved : id}} , {new:true})
+        }
+        res.status(200).json(userDoc)
+        // res.status(200).json("Listing added to saved")
+    } catch (error) {
+        next(error)
+    }
+}

@@ -70,9 +70,37 @@ const getUser = async (req, res, next) => {
     }
 };
 
+const saveListing = async (req, res, next) => {
+
+    try {
+        const userDoc = await User.findById(req.user.id)
+        const {listingId} = req.params
+    
+        if (!userDoc.saved.includes(listingId)) {
+            userDoc.saved.push(listingId)
+            await userDoc.save()
+        } 
+        res.status(200).json(userDoc)        
+    } catch (error) {
+        next(error)
+    }
+}
+
+const getSavedListings = async (req , res , next)=>{
+
+    try {
+        const {saved} = await User.findById(req.user.id).populate('saved')
+        res.status(200).json(saved);
+    } catch (error) {
+        next(error)
+    }
+}
+
 export {
     updateUserInfo,
     deleteUser,
     getUserListings,
-    getUser
+    getUser,
+    saveListing,
+    getSavedListings
 }

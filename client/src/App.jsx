@@ -13,6 +13,7 @@ import CreateListing from "./pages/CreateListing";
 import UpdateListing from './pages/UpdateListing'
 import Listing from "./pages/Listing";
 import Search from "./pages/Search";
+import ProfileDashboard from "./pages/ProfileDashboard";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <Route path="/search" element={<Search />} />
 
           <Route element={<PrivateRoute />}>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<ProfileDashboard />} />
             <Route path="/create-listing" element={<CreateListing />} />
             <Route path="/update-listing/:listingId" element={<UpdateListing />} />
             <Route path='/listing/:listingId' element={<Listing />} />

@@ -59,7 +59,15 @@ const userSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
-
+        removeSavedListing : (state , action) =>{
+            const removeId = action.payload
+            state.currentUser.saved = state.currentUser.saved.filter((listingId)=> listingId != removeId)
+            
+        },
+        addSavedListing : (state , action) =>{
+            const addId = action.payload
+            state.currentUser.saved.push(addId)
+        }
     }
 })
 
@@ -76,6 +84,8 @@ export const {
     signOutUserFailure,
     signOutUserSuccess,
     signOutUserStart,
+    removeSavedListing,
+    addSavedListing
 } = userSlice.actions;
 
 export default userSlice.reducer;

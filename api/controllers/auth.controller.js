@@ -30,7 +30,7 @@ const signin = async (req, res, next) => {
     const { email, password } = req.body;
 
     try {
-        const validUser = await User.findOne({ email });
+        const validUser = await User.findOne({ email })
         if (!validUser) {
             return next(errorhandler(404, 'User not found'))
         }
