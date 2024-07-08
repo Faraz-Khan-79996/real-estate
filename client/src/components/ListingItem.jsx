@@ -99,7 +99,7 @@ export default function ListingItem({ listing }) {
               </div>
             </div>
 
-            {currentUser && currentUser.saved.includes(listing._id)==true ? (
+            {currentUser && currentUser.saved && currentUser.saved.length>0 &&  currentUser.saved.includes(listing._id)==true ? (
               <BsFillBookmarksFill onClick={()=>  removeFromBookMarkHandler(listing._id)} size={35} className="self-end hover:scale-125 transition-transform duration-200 hover:text-blue-500" />
             ) : (
               <MdOutlineBookmarkAdd onClick={()=>  addToBookMarkHandler(listing._id)} size={35} className="self-end hover:scale-125 transition-transform duration-200 hover:text-blue-500" />
