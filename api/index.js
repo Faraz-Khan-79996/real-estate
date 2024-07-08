@@ -5,6 +5,7 @@ import mongoose  from 'mongoose';
 import UserRouter from './routes/user.route.js'
 import AuthRouter from './routes/auth.route.js'
 import listingRouter from './routes/listing.route.js';
+import BookingRouter from './routes/booking.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
@@ -29,6 +30,7 @@ app.use(cookieParser())
 app.use('/api/user' , UserRouter)
 app.use('/api/auth' , AuthRouter)
 app.use('/api/listing' , listingRouter)
+app.use('/api/booking' , BookingRouter)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));

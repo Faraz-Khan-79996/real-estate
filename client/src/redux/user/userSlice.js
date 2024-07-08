@@ -67,7 +67,7 @@ const userSlice = createSlice({
         addSavedListing : (state , action) =>{
             const addId = action.payload
             state.currentUser.saved.push(addId)
-        }
+        },
     }
 })
 

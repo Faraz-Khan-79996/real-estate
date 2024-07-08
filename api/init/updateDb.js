@@ -39,4 +39,13 @@ async function addOwnerListingToUser() {
     }
 }
 
-addOwnerListingToUser()
+async function clearBookings() {
+    
+    await User.updateMany({} , {$set :{
+        userBookings : [],
+        receivedBookings : [],
+    }})
+}
+
+// addOwnerListingToUser()
+clearBookings()

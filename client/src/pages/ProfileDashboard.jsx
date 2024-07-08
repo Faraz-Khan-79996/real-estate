@@ -21,6 +21,8 @@ import { Button } from "flowbite-react";
 import { AiOutlineMenu } from "react-icons/ai";
 import SideBarContent from "../components/profile-component/SideBarContent";
 import SavedListings from "../components/profile-component/SavedListings";
+import UserBookings from "../components/profile-component/UserBookings";
+import ReceivedBooking from "../components/profile-component/ReceivedBooking";
 
 function ProfileDashboard() {
   const location = useLocation();
@@ -48,10 +50,10 @@ function ProfileDashboard() {
       {tab === "your-listings" && <OwnerListings />}
       {/* users */}
       {tab === 'saved' && <SavedListings />}
-      {/* comments  */}
-      {/* {tab === 'comments' && <DashComments />} */}
-      {/* dashboard comp */}
-      {/* {tab === 'dash' && <DashboardComp />} */}
+      {/* user's bookings  */}
+      {tab === 'my-bookings' && <UserBookings />}
+      {/* received bookings */}
+      {tab === 'received-bookings' && <ReceivedBooking />}
     </div>
   );
 }
