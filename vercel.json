@@ -26,7 +26,7 @@
         "src": "/",
         "dest": "client/dist/index.html"
       },
-      { "src": "/[^.]+", "dest": "/client", "status": 200 },
+      { "src": "/[^.]+", "dest": "/client/dist/index.html", "status": 200 },
       {
         "src": "/(.+)",
         "dest": "client/dist/$1"
